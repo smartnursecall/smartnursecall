@@ -2,15 +2,15 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebas
 import { getDatabase, ref, onValue, push, remove, update, get } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-database.js";
 import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js";
 
-// Firebase config
+// Firebase config untuk Smarts NurseCall
 const firebaseConfig = {
-  apiKey: "AIzaSyBiRnmrJwnYGdKtX5DR4mcsgsf_wkTo_V4",
-  authDomain: "careassist-notify.firebaseapp.com",
-  databaseURL: "https://careassist-notify-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "careassist-notify",
-  storageBucket: "careassist-notify.firebasestorage.app",
-  messagingSenderId: "279878356808",
-  appId: "1:279878356808:web:08e40763159a4aad152d7d"
+  apiKey: "AIzaSyBbsIHEi1z4fm4c8NLe5YZGVjEoc3kvI_Y",
+  authDomain: "smarts-nursecall.firebaseapp.com",
+  databaseURL: "https://smarts-nursecall-default-rtdb.asia-southeast1.firebasedatabase.app", // URL Database Realtime
+  projectId: "smarts-nursecall",
+  storageBucket: "smarts-nursecall.firebasestorage.app",
+  messagingSenderId: "967036392670",
+  appId: "1:967036392670:web:afa21c37ef065478851e4f"
 };
 
 const app = initializeApp(firebaseConfig);
@@ -34,9 +34,9 @@ let isFirstLoad = true;
 // FUNGSI PENGATURAN (localStorage)
 // =======================
 function loadSettings() {
-  const soundEnabled = localStorage.getItem('careassist_sound_enabled') !== 'false';
-  const notificationEnabled = localStorage.getItem('careassist_notification_enabled') !== 'false';
-  const theme = localStorage.getItem('careassist_theme') || 'light';
+  const soundEnabled = localStorage.getItem('smartsnursecall_sound_enabled') !== 'false';
+  const notificationEnabled = localStorage.getItem('smartsnursecall_notification_enabled') !== 'false';
+  const theme = localStorage.getItem('smartsnursecall_theme') || 'light';
 
   document.getElementById('sound-toggle').checked = soundEnabled;
   document.getElementById('notification-toggle').checked = notificationEnabled;
@@ -65,7 +65,7 @@ async function requestNotificationPermission() {
 }
 
 function showBrowserNotification(title, options) {
-  const notificationEnabled = localStorage.getItem('careassist_notification_enabled') !== 'false';
+  const notificationEnabled = localStorage.getItem('smartsnursecall_notification_enabled') !== 'false';
   if (notificationEnabled && Notification.permission === 'granted') {
     const notification = new Notification(title, options);
     notification.onclick = () => {
@@ -226,7 +226,7 @@ function listenAlerts() {
       if (newAlertEntry) {
         const [alertKey, alertData] = newAlertEntry;
         const [room] = alertKey.split('/');
-        showBrowserNotification('CareAssist Notify - Alert Baru!', {
+        showBrowserNotification('Smarts NurseCall - Alert Baru!', {
           body: `Ada panggilan dari Ruang ${room.replace('room_', '')} (${alertData.type})`,
           icon: 'icon.png', tag: alertKey, requireInteraction: true
         });
@@ -293,10 +293,10 @@ document.addEventListener('click', (event) => {
     dropdownContent.classList.remove('show');
   }
 });
-document.getElementById('sound-toggle').addEventListener('change', (e) => { saveSetting('careassist_sound_enabled', e.target.checked); });
-document.getElementById('notification-toggle').addEventListener('change', (e) => { saveSetting('careassist_notification_enabled', e.target.checked); });
+document.getElementById('sound-toggle').addEventListener('change', (e) => { saveSetting('smartsnursecall_sound_enabled', e.target.checked); });
+document.getElementById('notification-toggle').addEventListener('change', (e) => { saveSetting('smartsnursecall_notification_enabled', e.target.checked); });
 document.getElementById('theme-select').addEventListener('change', (e) => {
-  const theme = e.target.value; saveSetting('careassist_theme', theme); applyTheme(theme);
+  const theme = e.target.value; saveSetting('smartsnursecall_theme', theme); applyTheme(theme);
 });
 
 // --- Clear Handled Alerts ---
