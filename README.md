@@ -1,4 +1,4 @@
-# Smarts NurseCall
+# Smart NurseCall
 
 A **Real-Time Nurse Call Management System** designed for healthcare facilities. The system is integrated with **Firebase Realtime Database** to deliver instant notifications to nurses, enabling quick responses to patient requests. It focuses on a responsive interface, simple workflows, and secure data handling.
 
@@ -36,17 +36,17 @@ A **Real-Time Nurse Call Management System** designed for healthcare facilities.
 
 ### 1. Clone Repository
 ```bash
-git clone https://github.com/YOUR_USERNAME/SMARTSNURSECALL-YOUR-REPO.git
-cd SMARTSNURSECALL-YOUR-REPO
+git clone https://github.com/YOUR_USERNAME/SMARTNURSECALL-YOUR-REPO.git
+cd SMARTNURSECALL-YOUR-REPO
 ```
 
 ### 2. Setup Firebase Project
 - Open [Firebase Console](https://console.firebase.google.com/).  
-- Create a new project (e.g., "smarts-nursecall").  
+- Create a new project (e.g., "smart-nursecall").  
 - Enable **Realtime Database** and **Authentication**.  
 - In Authentication, enable **Email/Password** sign-in method.  
 - Retrieve your project configuration (apiKey, authDomain, databaseURL, etc.) from Project Settings.  
-- Create a dedicated user account for ESP8266 devices (e.g., `device@smartsnursecall.com`).  
+- Create a dedicated user account for ESP8266 devices (e.g., `device@gmail.com`).  
 
 ### 3. Configure Web Application
 - Open `app.js`, `index.html`, and `dashboard.html`.  
