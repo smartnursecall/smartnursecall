@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CareAssist Notify - Dashboard</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="favicon.png" type="image/png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <audio id="notification-sound" src="sounds/alert.mp3" preload="auto"></audio>
+
+  <header>
+    <div class="header-content">
+      <h1><img id="main-logo" src="logo-light.png" alt="CareAssist Notify Icon" class="brand-icon"> CareAssist Notify</h1>
+      <p class="tagline">Sistem Manajemen Panggilan Pasien Real-Time</p>
+    </div>
+    <nav>
+      <div class="nav-left">
+        <button id="tab-dashboard"><i class="fas fa-house-chimney-medical"></i> Dashboard</button>
+        <button id="tab-history"><i class="fas fa-clock-rotate-left"></i> History</button>
+        <button id="clear-handled-btn"><i class="fas fa-broom"></i> Bersihkan Status</button>
+        <button id="logout-btn" class="logout-btn"><i class="fas fa-right-from-bracket"></i> Logout</button>
+      </div>
+      <div class="nav-right">
+        <div class="dropdown">
+          <button id="settings-toggle-btn" class="settings-btn">
+            <i class="fas fa-cog"></i> <i class="fas fa-caret-down"></i>
+          </button>
+          <div class="dropdown-content">
+            <div class="setting-item">
+              <div class="setting-info">
+                <h3>Notifikasi Suara</h3>
+                <p>Mainkan suara setiap kali ada panggilan baru atau pembaruan.</p>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="sound-toggle" checked>
+                <span class="slider round"></span>
+              </label>
+            </div>
+            <div class="setting-item">
+              <div class="setting-info">
+                <h3>Notifikasi Browser</h3>
+                <p>Tampilkan notifikasi native di sistem operasi (Windows/macOS).</p>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="notification-toggle" checked>
+                <span class="slider round"></span>
+              </label>
+            </div>
+            <div class="setting-item">
+              <div class="setting-info">
+                <h3>Tema Aplikasi</h3>
+                <p>Pilih antara Light Mode dan Dark Mode.</p>
+              </div>
+              <select id="theme-select">
+                <option value="light">Light Mode</option>
+                <option value="dark">Dark Mode</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <div class="container">
+    <main>
+      <section id="dashboard">
+        <div class="section-header">
+          <h2><i class="fas fa-bell"></i> Panggilan Aktif</h2>
+          <p>Menampilkan semua permintaan yang belum ditangani.</p>
+        </div>
+        <div id="active-list">
+          <p class="empty-state"><i class="fas fa-check-circle"></i> Tidak ada panggilan aktif saat ini.</p>
+        </div>
+        <div class="section-header">
+          <h2><i class="fas fa-check-double"></i> Panggilan Selesai</h2>
+          <p>Menampilkan semua permintaan yang sudah ditangani.</p>
+        </div>
+        <div id="handled-list">
+           <p class="empty-state"><i class="fas fa-clipboard-check"></i> Belum ada panggilan yang selesai.</p>
+        </div>
+      </section>
+
+      <section id="history" style="display:none;">
+        <div class="section-header">
+          <h2><i class="fas fa-clock-rotate-left"></i> Log Panggilan</h2>
+          <p>Melihat dan mengelola riwayat semua panggilan.</p>
+        </div>
+        <div class="history-actions">
+          <label for="filter-date"><i class="fas fa-calendar-day"></i> Filter tanggal:</label>
+          <input type="date" id="filter-date">
+          <button id="filter-btn"><i class="fas fa-filter"></i> Tampilkan</button>
+          <label for="delete-date"><i class="fas fa-trash-alt"></i> Hapus berdasarkan tanggal:</label>
+          <input type="date" id="delete-date">
+          <button id="delete-history-btn" class="btn-danger"><i class="fas fa-trash"></i> Hapus</button>
+        </div>
+        <table class="history-table">
+          <thead>
+            <tr>
+              <th><i class="fas fa-door-open"></i> Nomor Ruang</th>
+              <th><i class="fas fa-exclamation-triangle"></i> Jenis Alert</th>
+              <th><i class="fas fa-info-circle"></i> Status</th>
+              <th><i class="fas fa-clock"></i> Waktu</th>
+            </tr>
+          </thead>
+          <tbody id="history-table"></tbody>
+        </table>
+      </section>
+    </main>
+  </div>
+
+  <footer class="site-footer">
+    <p>&copy; 2024 CareAssist Notify. All Rights Reserved.</p>
+  </footer>
+
+  <div id="confirm-modal" class="modal">
+    <div class="modal-overlay" onclick="closeConfirmModal()"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3><i class="fas fa-exclamation-triangle"></i> Konfirmasi Hapus</h3>
+      </div>
+      <div class="modal-body">
+        <p>Apakah Anda yakin ingin menghapus riwayat untuk tanggal ini? Tindakan ini tidak dapat dibatalkan.</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-cancel" onclick="closeConfirmModal()">
+          <i class="fas fa-times"></i> Batal
+        </button>
+        <button class="btn-confirm-delete" id="confirm-delete-btn">
+          <i class="fas fa-trash"></i> Ya, Hapus
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,549 @@
+/* ==========================================
+   CARE ASSIST NOTIFY - GAYA HYBRID (FINAL VERSION)
+   Tema: Elegan Blue Spectrum + Prioritas Warna Standar
+   ========================================== */
+
+/* 1. IMPOR FONT SERIF YANG ELEGAN DARI GOOGLE FONTS */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');
+
+/* 2. DEFINISI VARIABEL TEMA (PALET BIRU UNTUK UI UMUM) */
+:root {
+  --bg-color-start: #e0eafc;
+  --bg-color-end: #cfdef3;
+  --bg-color-3: #f0f4f8;
+  --bg-color-4: #d9e2ec;
+
+  --card-bg: rgba(255, 255, 255, 0.9);
+  --text-color: #212529;
+  --text-muted: #495057;
+  --border-color: rgba(0, 0, 0, 0.1);
+
+  --primary-color: #0A4D68;
+  --secondary-color: #0077b6;
+  --accent-color: #48cae4;
+ 
+  --font-family: 'Playfair Display', 'Lora', Georgia, serif;
+  --border-radius: 16px;
+  --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+  --shadow-hover: 0 8px 32px 0 rgba(31, 38, 135, 0.25);
+}
+
+/* 3. BACKGROUND ANIMASI & TIPOGRAFI */
+body {
+  font-family: var(--font-family);
+  background: linear-gradient(-45deg, var(--bg-color-start), var(--bg-color-end), var(--bg-color-3), var(--bg-color-4));
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+  color: var(--text-color);
+  margin: 0;
+  padding: 20px;
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+h1 {
+  font-size: 3.5rem;
+  text-align: center;
+  background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 40px;
+  font-weight: 800;
+  font-family: 'Playfair Display', var(--font-family);
+}
+
+/* 4. GAYA UNTUK ELEMEN BARU DI HTML */
+.container {
+  flex: 1;
+}
+
+.tagline {
+  text-align: center;
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  margin-top: -15px;
+  margin-bottom: 30px;
+  font-weight: 400;
+}
+
+.brand-icon {
+  height: 1.5em;
+  vertical-align: middle;
+  margin-right: 12px;
+}
+
+.site-footer {
+  text-align: center;
+  font-style: italic;
+  color: var(--text-muted);
+  padding: 20px 0;
+  margin-top: auto;
+  font-size: 0.9rem;
+}
+
+/* --- Layout Navigasi Baru --- */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  flex-wrap: wrap; /* Allow wrapping on smaller screens */
+}
+
+.nav-left {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.nav-right {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+nav button {
+  margin: 0 6px;
+  padding: 14px 28px;
+  border: none;
+  border-radius: 50px;
+  background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+  color: #FFFFFF;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+}
+nav button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: left 0.5s;
+}
+nav button:hover::before {
+  left: 100%;
+}
+nav button:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: var(--shadow-hover);
+}
+
+/* 5. KARTU DENGAN IKON & ANIMASI AMAN */
+.card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 28px;
+  margin: 20px 0;
+  background: var(--card-bg);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  transition: all 0.4s ease;
+  border-left: 6px solid transparent;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--border-color);
+  animation: slideInScale 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  transform: scale(0.95);
+}
+
+@keyframes slideInScale {
+  to { transform: scale(1); }
+}
+
+.card:hover {
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-5px) scale(1.02);
+}
+
+.card.handled { 
+  opacity: 0.6;
+  filter: grayscale(0.8);
+}
+
+/* 6. WARNA PRIORITAS & IKON */
+.card.red { border-left-color: #e74c3c; background: rgba(231, 76, 60, 0.15); }
+.card.yellow { border-left-color: #f1c40f; background: rgba(241, 196, 15, 0.15); }
+.card.white { border-left-color: #2ecc71; background: rgba(46, 204, 113, 0.15); }
+
+.alert-icon {
+  font-size: 3rem;
+  margin-right: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  flex-shrink: 0; /* Prevents icon from shrinking */
+}
+.card.red .alert-icon { color: #c0392b; }
+.card.yellow .alert-icon { color: #d68910; }
+.card.white .alert-icon { color: #27ae60; }
+
+/* 7. GAYA UNTUK DETAIL KARTU (PERBAIKAN LAYOUT) */
+.card-details-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  flex-grow: 1;
+}
+
+.card-details-simple {
+  flex: 1;
+  min-width: 150px; /* Ensures columns don't get too small */
+}
+.card-details-simple div {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.card-details-simple b {
+  color: var(--text-muted);
+  min-width: 80px;
+  margin-right: 10px;
+  flex-shrink: 0; /* Prevents label from shrinking */
+}
+
+.footer {
+  margin-left: 20px;
+  flex-shrink: 0; /* Prevents button container from shrinking */
+}
+
+.card button {
+  padding: 14px 24px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+  color: #FFFFFF;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(10, 77, 104, 0.4);
+}
+.card button:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 6px 20px rgba(10, 77, 104, 0.6);
+}
+.card button:disabled {
+  background: #adb5bd;
+  color: #f8f9fa;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+/* --- Section Headers --- */
+.section-header {
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--primary-color);
+}
+.section-header h2 {
+  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.section-header p {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-top: 0.25rem;
+}
+
+/* --- Empty States --- */
+.empty-state {
+  text-align: center;
+  padding: 40px;
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  background-color: var(--card-bg);
+  border-radius: var(--border-radius);
+  border: 1px dashed var(--border-color);
+}
+.empty-state i {
+  font-size: 3rem;
+  display: block;
+  margin-bottom: 15px;
+  color: var(--accent-color);
+}
+
+/* 8. HALAMAN RIWAYAT */
+.history-actions { margin: 20px 0; display: flex; align-items: center; gap: 15px; flex-wrap: wrap; }
+.history-actions label { font-weight: 600; color: var(--text-color); }
+.history-actions input[type="date"] {
+  padding: 12px 15px;
+  border-radius: 10px;
+  border: 1px solid var(--border-color);
+  background: var(--card-bg);
+  color: var(--text-color);
+  font-size: 1rem;
+}
+.history-actions button, .history-actions .btn-danger {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow);
+}
+.history-actions button {
+  background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+  color: #FFFFFF;
+}
+.history-actions button:hover, .history-actions .btn-danger:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: var(--shadow-hover);
+}
+
+.history-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background: var(--card-bg);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.history-table th, .history-table td { padding: 16px 18px; text-align: left; border-bottom: 1px solid var(--border-color); }
+.history-table th {
+  background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+  color: #FFFFFF;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+}
+.history-table tr:nth-child(even) { background: rgba(248, 249, 250, 0.5); }
+.history-table tr:hover { background: rgba(233, 236, 239, 0.7); }
+
+/* 9. RESPONSIVE UNTUK TABLET & DESKTOP KECIL (PERBAIKAN) */
+@media (max-width: 1024px) {
+  nav {
+    flex-direction: column;
+    gap: 15px;
+  }
+  .nav-left, .nav-right {
+    width: 100%;
+    justify-content: center;
+  }
+  .card {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+  }
+  .alert-icon {
+    margin-right: 0;
+    margin-bottom: 15px;
+    align-self: center;
+  }
+  .card-details-container {
+    justify-content: center;
+  }
+  .footer {
+    margin-left: 0;
+    margin-top: 15px;
+    align-self: center;
+  }
+}
+
+/* 10. RESPONSIVE UNTUK MOBILE */
+@media (max-width: 600px) {
+  body { padding: 10px; }
+  h1 { font-size: 2.5rem; }
+  .card { 
+    padding: 15px; /* Kurangi dari 20px untuk hemat space vertikal */
+    margin: 10px 0; /* Kurangi dari 15px untuk lebih efisien */
+    flex-direction: column; /* Tetap vertikal untuk readability */
+    align-items: stretch;
+    text-align: center;
+  }
+  .alert-icon { 
+    font-size: 2rem; 
+    width: 50px; /* Kurangi dari 60px agar tidak terlalu besar */
+    height: 50px; 
+    margin-right: 0; 
+    margin-bottom: 10px; /* Kurangi jarak bawah untuk kompak */
+    align-self: center; 
+  }
+  .card-details-container {
+    justify-content: center;
+    gap: 15px; /* Kurangi gap dari 20px */
+  }
+  .card-details-simple { 
+    min-width: 100%; 
+  }
+  .card-details-simple div { 
+    flex-direction: row; /* Ubah ke horizontal untuk label + nilai agar lebih efisien, tapi tetap readable */
+    align-items: flex-start; 
+    margin-bottom: 6px; /* Kurangi dari 8px untuk hemat tinggi */
+  }
+  .card-details-simple b { 
+    min-width: 70px; /* Kurangi dari 80px untuk lebih kompak */
+    margin-bottom: 0; /* Hapus margin bawah karena sekarang row */
+    margin-right: 8px; /* Kurangi dari 10px */
+  }
+  .footer {
+    margin-left: 0;
+    margin-top: 10px; /* Kurangi dari 15px */
+    align-self: center;
+  }
+  .card button { 
+    width: 100%; 
+    padding: 12px 20px; /* Kurangi padding dari 14px 24px untuk efisiensi */
+  }
+  nav button { 
+    margin: 5px; 
+    padding: 10px 16px; /* Kurangi padding dari 10px 18px */
+    font-size: 0.9rem; 
+  }
+  .history-actions { 
+    flex-direction: column; 
+    align-items: stretch; 
+  }
+  .history-actions label, .history-actions input[type="date"], .history-actions button, .history-actions .btn-danger {
+    width: 100%; 
+    margin-left: 0 !important; 
+    margin-bottom: 8px; /* Kurangi dari 10px untuk kompak */
+  }
+  .history-table { 
+    font-size: 0.8rem; 
+  }
+  .history-table th, .history-table td { 
+    padding: 8px 6px; /* Kurangi dari 10px 8px untuk hemat space */
+  }
+}
+
+/* ==========================================
+   GAYA UNTUK MODAL KONFIRMASI CUSTOM
+   ========================================== */
+.modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1000; justify-content: center; align-items: center; }
+.modal-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); }
+.modal-content {
+  position: relative; z-index: 1; background: var(--card-bg); border-radius: var(--border-radius);
+  box-shadow: var(--shadow-hover); border: 1px solid var(--border-color);
+  max-width: 450px; width: 90%; animation: modalFadeIn 0.3s ease-out;
+}
+@keyframes modalFadeIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+.modal-header, .modal-body, .modal-footer { padding: 20px 24px; }
+.modal-header { border-bottom: 1px solid var(--border-color); }
+.modal-header h3 { margin: 0; color: var(--primary-color); font-weight: 600; }
+.modal-body { color: var(--text-color); }
+.modal-body p { margin: 0; line-height: 1.6; }
+.modal-footer { border-top: 1px solid var(--border-color); display: flex; justify-content: flex-end; gap: 12px; }
+.modal-footer button { padding: 10px 20px; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; }
+.btn-cancel { background: #e9ecef; color: var(--text-color); }
+.btn-cancel:hover { background: #dee2e6; }
+.btn-confirm-delete { background: #dc3545; color: #FFFFFF; }
+.btn-confirm-delete:hover { background: #c82333; transform: translateY(-2px); box-shadow: 0 4px 8px rgba(220, 53, 69, 0.3); }
+.btn-danger { /* Style for delete button in history */
+  background: #dc3545; color: #FFFFFF;
+}
+
+/* ==========================================
+   GAYA UNTUK NAVIGASI BARU & DROPDOWN SETTINGS
+   ========================================== */
+.dropdown { position: relative; display: inline-block; }
+.settings-btn {
+  margin: 0 12px; padding: 14px; border: none; border-radius: 50%;
+  background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+  color: #FFFFFF; font-size: 1.2rem; cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: var(--shadow); position: relative; overflow: hidden;
+  width: 50px; height: 50px; display: flex; justify-content: center; align-items: center;
+}
+.settings-btn::before { content: ""; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent); transition: left 0.5s; }
+.settings-btn:hover::before { left: 100%; }
+.settings-btn:hover { transform: translateY(-3px) scale(1.05); box-shadow: var(--shadow-hover); }
+
+.dropdown-content {
+  display: none; position: absolute; right: 0; background-color: var(--card-bg);
+  min-width: 320px; box-shadow: var(--shadow-hover); z-index: 1000;
+  border-radius: var(--border-radius); border: 1px solid var(--border-color); padding: 1rem 1.5rem;
+}
+.dropdown-content.show { display: block; }
+
+.setting-item { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; border-bottom: 1px solid var(--border-color); }
+.setting-item:last-child { border-bottom: none; }
+.setting-info h3 { margin: 0 0 5px 0; color: var(--primary-color); font-size: 1rem; }
+.setting-info p { margin: 0; color: var(--text-muted); font-size: 0.8rem; }
+
+/* --- The switch --- */
+.switch { position: relative; display: inline-block; width: 60px; height: 34px; }
+.switch input { opacity: 0; width: 0; height: 0; }
+.slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; }
+.slider:before { position: absolute; content: ""; height: 26px; width: 26px; left: 4px; bottom: 4px; background-color: white; transition: .4s; }
+input:checked + .slider { background-color: var(--secondary-color); }
+input:focus + .slider { box-shadow: 0 0 1px var(--secondary-color); }
+input:checked + .slider:before { transform: translateX(26px); }
+.slider.round { border-radius: 34px; }
+.slider.round:before { border-radius: 50%; }
+
+/* --- Custom Select --- */
+#theme-select {
+  padding: 10px; border-radius: 5px; border: 1px solid var(--border-color);
+  background: var(--bg-color-3); color: var(--text-color);
+  font-family: var(--font-family); cursor: pointer;
+}
+
+/* ==========================================
+   GAYA UNTUK TEMA DARK MODE (REDESIGN)
+   ========================================== */
+body.dark-mode {
+  --bg-color-start: #0d1117;
+  --bg-color-end: #161b22;
+  --bg-color-3: #21262d;
+  --bg-color-4: #30363d;
+
+  --card-bg: #21262d;
+  --text-color: #c9d1d9;
+  --text-muted: #8b949e;
+  --border-color: #30363d;
+
+  --primary-color: #58a6ff;
+  --secondary-color: #79c0ff;
+  --accent-color: #1f6feb;
+
+  --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+  --shadow-hover: 0 8px 32px 0 rgba(0, 0, 0, 0.6);
+}
+body.dark-mode {
+  background: linear-gradient(-45deg, var(--bg-color-start), var(--bg-color-end), var(--bg-color-3), var(--bg-color-4));
+}
+body.dark-mode .card {
+  border-color: var(--border-color);
+}
+body.dark-mode .card.red { background: rgba(248, 81, 73, 0.2); }
+body.dark-mode .card.yellow { background: rgba(219, 188, 46, 0.2); }
+body.dark-mode .card.white { background: rgba(63, 185, 80, 0.2); }
+body.dark-mode .alert-icon { background: rgba(255, 255, 255, 0.1); }
+body.dark-mode .modal-content { background: var(--card-bg); color: var(--text-color); border: 1px solid var(--border-color); }
+body.dark-mode .modal-header h3 { color: var(--accent-color); }
+body.dark-mode .btn-cancel { background: #30363d; color: var(--text-color); }
+body.dark-mode .btn-cancel:hover { background: #484f58; }
+body.dark-mode .history-table th { background: linear-gradient(45deg, var(--primary-color), var(--secondary-color)); }
+body.dark-mode .history-table tr:nth-child(even) { background: rgba(255, 255, 255, 0.02); }
+body.dark-mode .history-table tr:hover { background: rgba(255, 255, 255, 0.05); }
+body.dark-mode .dropdown-content { background-color: var(--card-bg); border-color: var(--border-color); }
+body.dark-mode .empty-state { background-color: var(--card-bg); border-color: var(--border-color); }
+body.dark-mode #theme-select { background: var(--bg-color-3); color: var(--text-color); }
