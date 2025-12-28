@@ -1,6 +1,6 @@
-# CareAssist Notify
+# Smarts NurseCall
 
-Sistem Manajemen Panggilan Pasien Real-Time berbasis web yang dirancang untuk fasilitas kesehatan. Sistem ini terintegrasi dengan Firebase Realtime Database untuk memberikan notifikasi instan kepada perawat, memungkinkan respons yang cepat terhadap permintaan pasien. Fokus pada antarmuka yang responsif, alur kerja yang sederhana, dan keamanan data.
+Sistem Manajemen Panggilan Perawat Real-Time berbasis web yang dirancang untuk fasilitas kesehatan. Sistem ini terintegrasi dengan Firebase Realtime Database untuk memberikan notifikasi instan kepada perawat, memungkinkan respons yang cepat terhadap permintaan pasien. Fokus pada antarmuka yang responsif, alur kerja yang sederhana, dan keamanan data.
 
 ## Fitur
 
@@ -19,6 +19,7 @@ Sistem Manajemen Panggilan Pasien Real-Time berbasis web yang dirancang untuk fa
 *   **Database & Backend:** Menggunakan Firebase sebagai Backend-as-a-Service (BaaS).
     *   **Firebase Realtime Database:** Untuk sinkronisasi data real-time.
     *   **Firebase Authentication:** Untuk sistem autentikasi pengguna (Login/Logout).
+*   **Device Layer:** Perangkat ESP8266 yang berfungsi sebagai unit pemanggil di setiap ruangan, mengirim data ke Firebase.
 
 ## Struktur Data (Firebase Realtime Database)
 
@@ -32,26 +33,38 @@ Sistem Manajemen Panggilan Pasien Real-Time berbasis web yang dirancang untuk fa
 
 ## Setup Cepat
 
-1.  **Clone repositori:**
-    ```bash
-    git clone https://github.com/USERNAME_ANDA/CAREASSIST-REPO-ANDA.git
-    cd CAREASSIST-REPO-ANDA
-    ```
-2.  **Buat Proyek Firebase:**
-    *   Buka [Firebase Console](https://console.firebase.google.com/).
-    *   Buat proyek baru.
-    *   Aktifkan **Realtime Database** dan **Authentication**.
-    *   Di menu Authentication, aktifkan metode sign-in **Email/Password**.
-    *   Ambil konfigurasi proyek Anda (apiKey, authDomain, databaseURL, dll.) dari menu Project Settings.
-3.  **Konfigurasi Aplikasi:**
-    *   Buka file `app.js`.
-    *   Ganti nilai variabel `firebaseConfig` dengan konfigurasi dari proyek Firebase Anda.
-4.  **Jalankan Secara Lokal:**
-    *   Anda bisa menggunakan ekstensi Live Server di Visual Studio Code, atau
-    *   Buka file `index.html` langsung di browser Anda.
-5.  **Deploy ke GitHub Pages:**
-    *   Push semua perubahan ke repositori GitHub Anda.
-    *   Buka repositori Anda, lalu pergi ke **Settings > Pages**.
-    *   Di bagian "Build and deployment", pilih sumber **Deploy from a branch**.
-    *   Pilih branch `main` (atau `master`) dan folder `/ (root)`.
-    *   Klik **Save**. Situs Anda akan tersedia di `https://USERNAME_ANDA.github.io/CAREASSIST-REPO-ANDA`.
+### 1. Clone Repositori
+```bash
+git clone https://github.com/USERNAME_ANDA/SMARTSNURSECALL-REPO-ANDA.git
+cd SMARTSNURSECALL-REPO-ANDA
+```
+
+### 2. Setup Proyek Firebase
+*   Buka [Firebase Console](https://console.firebase.google.com/).
+*   Buat proyek baru (contoh: "smarts-nursecall").
+*   Aktifkan **Realtime Database** dan **Authentication**.
+*   Di menu Authentication, aktifkan metode sign-in **Email/Password**.
+*   Ambil konfigurasi proyek Anda (apiKey, authDomain, databaseURL, dll.) dari menu Project Settings.
+*   Buat satu akun pengguna khusus untuk perangkat ESP8266 (contoh: `device@smartsnursecall.com`).
+
+### 3. Konfigurasi Aplikasi Web
+*   Buka file `app.js`, `index.html`, dan `dashboard.html`.
+*   Ganti nilai variabel `firebaseConfig` dengan konfigurasi dari proyek Firebase Anda.
+
+### 4. Konfigurasi Perangkat ESP8266
+*   Buka file kode ESP8266 (`.ino`).
+*   Ganti nilai `FIREBASE_API_KEY` dan `FIREBASE_DATABASE_URL` dengan konfigurasi dari proyek Firebase Anda.
+*   Ganti `USER_EMAIL` dan `USER_PASSWORD` dengan kredensial akun khusus perangkat yang Anda buat di langkah 2.
+*   Ubah `ROOM_ID` untuk setiap perangkat ESP8266 yang berbeda (contoh: "001", "002", dst.).
+*   Upload kode ke perangkat ESP8266.
+
+### 5. Jalankan Secara Lokal
+*   Anda bisa menggunakan ekstensi Live Server di Visual Studio Code, atau
+*   Buka file `index.html` langsung di browser Anda.
+
+### 6. Deploy ke GitHub Pages
+*   Push semua perubahan ke repositori GitHub Anda.
+*   Buka repositori Anda, lalu pergi ke **Settings > Pages**.
+*   Di bagian "Build and deployment", pilih sumber **Deploy from a branch**.
+*   Pilih branch `main` (atau `master`) dan folder `/ (root)`.
+*   Klik **Save**. Situs Anda akan tersedia di `https://USERNAME_ANDA.github.io/SMARTSNURSECALL-REPO-ANDA`.
